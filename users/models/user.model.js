@@ -32,7 +32,7 @@ exports.loginUser = (info)=>{
 
     return new Promise((resolve,reject)=>{
 
-        Users.({$or:[{email:info.eou},{username:info.eou}],password:info.password},{password:0}).exec((error,result)=>{
+        Users.find({$or:[{email:info.eou},{username:info.eou}],password:info.password},{password:0}).exec((error,result)=>{
             
             if(error){
                 reject(error.message);
@@ -62,7 +62,7 @@ exports.registerUser = (user)=>{
     try{
 
         const usr = new Users(user);
-
+        return usr.save().catch(error=>error.message);
         
 
     }catch(error){
@@ -76,7 +76,7 @@ exports.updateUserPic = (userid,picname)=>{
 
     return new Promise((resolve,reject)=>{
 
-        findOneAndUpdate({_id:},{$set:{user_image:}},{new:true}).exec((error,user)=>{
+        Users.findOneAndUpdate({_id:userid},{$set:{user_image:picname}},{new:true}).exec((error,user)=>{
             
             if(error){
                 reject(error.message);
