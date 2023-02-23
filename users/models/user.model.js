@@ -1,24 +1,24 @@
 'use strict'
 
 const mongoose = require('../../common/services/mongoose.service').mongoose;
+const { Schema } = mongoose;
 
-
-const usersSchema = new mongoose.Schema({
+const usersSchema = new Schema({
         
     name:{
-        type:mongoose.Schema.Types.String
+        type:Schema.Types.String
     },
     username:{
-        type:mongoose.Schema.Types.String
+        type:Schema.Types.String
     },
     user_image:{
-        type:mongoose.Schema.Types.String
+        type:Schema.Types.String
     },
     email:{
-        type:mongoose.Schema.Types.String
+        type:Schema.Types.String
     },
     password:{
-        type:mongoose.Schema.Types.String
+        type:Schema.Types.String
     }
 
 },{versionKey:false})
@@ -32,7 +32,7 @@ exports.loginUser = (info)=>{
 
     return new Promise((resolve,reject)=>{
 
-        Users.find({$or:[{email:info.eou},{username:info.eou}],password:info.password},{password:0}).exec((error,result)=>{
+        Users.findOne({$or:[{email:info.eou},{username:info.eou}],password:info.password},{password:0}).exec((error,result)=>{
             
             if(error){
                 reject(error.message);
@@ -41,11 +41,11 @@ exports.loginUser = (info)=>{
             }
             
             if(result){
-                
                 console.log(result);
-                
-            }else{
                 resolve(result);
+
+            }else{
+                resolve(undefined);
             }
         })
 
