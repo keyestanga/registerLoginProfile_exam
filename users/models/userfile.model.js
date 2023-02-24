@@ -5,7 +5,7 @@ const path = require('path');
 
 
 //let assetsdir = path.join(__dirname,'../../../front_end/src/assets/image');
-let assetsdir = path.join(__dirname,'../../../rlp/src/assets/image')
+let assetsdir = path.join(__dirname,'../../../assets/image');
 
 
 exports.createDirectory = async(user)=>{

@@ -6,9 +6,9 @@ const userFileModel = require('../models/userfile.model');
 
 exports.registerUser = (request,response)=>{
 
-    console.log('received register user request',request.body);
+    console.log('received register user request');
 
-    usersModel.registerUser(response.locals).then((user,error)=>{
+    usersModel.registerUser(request.locals).then((user,error)=>{
 
         if(error){
             throw error.message;
@@ -43,9 +43,9 @@ exports.registerUser = (request,response)=>{
 exports.loginUser = (request,response)=>{
 
     console.log('received loginUser request');
-    console.log('received:',request.locals);
+    console.log('response locals: ', response.locals);
 
-    usersModel.loginUser(request.locals).then((user,error)=>{
+    usersModel.loginUser(response.locals).then((user,error)=>{
         console.log('loginUser: ', user);
         if(error){
             throw error.message;
