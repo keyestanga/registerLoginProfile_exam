@@ -8,7 +8,7 @@ exports.registerUser = (request,response)=>{
 
     console.log('received register user request');
 
-    usersModel.registerUser(request.locals).then((user,error)=>{
+    usersModel.registerUser(request.body).then((user,error)=>{
 
         if(error){
             throw error.message;
@@ -45,7 +45,7 @@ exports.loginUser = (request,response)=>{
     console.log('received loginUser request');
     console.log('response locals: ', response.locals);
 
-    usersModel.loginUser(response.locals).then((user,error)=>{
+    usersModel.loginUser(request.body).then((user,error)=>{
         console.log('loginUser: ', user);
         if(error){
             throw error.message;
